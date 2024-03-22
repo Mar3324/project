@@ -40,7 +40,7 @@
           <div class="carousel-item" data-bs-interval="4000">
           <div class="overlay-image" style="background-image:url('images/carsel6.jpg')"></div>   
             <div class="container">
-            <h2>Trusted by Hundred of farmers worldwide for record keeping.We are reliable</h2>
+            <h2>Trusted by hundreds of farmers worldwide for record keeping.We are reliable</h2>
             
               </ul>
             </div>

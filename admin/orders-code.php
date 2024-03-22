@@ -81,9 +81,10 @@ if(isset($_POST['productIncDec'])){
     if(isset($_POST['proceedToPlaceBtn'])){
         $phone = validate($_POST['cphone']);
         $payment_mode = validate($_POST['payment_mode']);
+        $user_id = $_SESSION['loggedInUser']['user_id'];
 
         //checking for customer
-        $checkCustomer = mysqli_query($conn,"SELECT * FROM customers WHERE phone='$phone' LIMIT 1");
+        $checkCustomer = mysqli_query($conn,"SELECT * FROM customers WHERE phone='$phone' AND user_id='$user_id' LIMIT 1");
         if($checkCustomer){
             if(mysqli_num_rows($checkCustomer) > 0){
                 $_SESSION['invoice_no'] = "INV-".rand(111111,999999);

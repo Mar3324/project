@@ -19,7 +19,10 @@
                     </thead>
                     <tbody>
                         <?php 
-                        $products = getAll('products');//function found in config/function.php and is used for retrieving all data in a database
+                       // $products = getAll('products');//function found in config/function.php and is used for retrieving all data in a database
+                          $user_id = $_SESSION['loggedInUser']['user_id'];
+                            $query = "SELECT * FROM products WHERE status='0' AND user_id='$user_id'";
+                            $products = mysqli_query($conn, $query);
                         if(!$products){
                             echo'<h3>Something is wrong!!Tell the devs to Check connection to database or check logic code</h3>';
                             return false;

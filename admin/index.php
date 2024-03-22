@@ -27,14 +27,14 @@
             </div>
         </div>
 
-        <div class="col-md-3 mb-3">
+        <!-- <div class="col-md-3 mb-3">
             <div class="card card-body bg-info text-white p-3">
                 <p class="text-sm mb-0 text-capitalize">Total Admins</p>
                 <h5 class="fw-bold mb-0">
-                    <?= getCount('admins')?>
+                    
                 </h5>
             </div>
-        </div>
+        </div> -->
 
         <div class="col-md-3 mb-3">
             <div class="card card-body bg-dark text-white p-3">
@@ -57,8 +57,9 @@
                     <p class="text-sm mb-0 text-capitalize">Today's Orders</p>
                     <h5 class="fw-bold md-0">
                         <?php 
+                        $user_id = $_SESSION['loggedInUser']['user_id'];
                         $todayDate = date('Y-m-d');
-                        $todayOrder = mysqli_query($conn,"SELECT * FROM orders WHERE order_date = '$todayDate'");
+                        $todayOrder = mysqli_query($conn,"SELECT * FROM orders WHERE order_date = '$todayDate' AND order_placed_by_id='$user_id'");
                         if($todayOrder){
                             if(mysqli_num_rows($todayOrder) > 0){
                                 $totalCountOrders = mysqli_num_rows($todayOrder);
@@ -80,7 +81,22 @@
             <div class="card card-body bg-secondary text-white p-3">
                 <p class="text-sm mb-0 text-capitalize">Total Orders</p>
                 <h5 class="fw-bold mb-0">
-                    <?= getCount('orders')?>
+                    <?php
+                $user_id = $_SESSION['loggedInUser']['user_id'];
+                $query = "SELECT * FROM orders WHERE order_placed_by_id='$user_id'";
+                $query_run = mysqli_query($conn, $query);
+                if($query_run){
+                    if(mysqli_num_rows($query_run) > 0){
+                        $totalCount = mysqli_num_rows($query_run);
+                        echo $totalCount;
+                    }else{
+                        echo "0";
+                    }
+
+                }else{
+                    echo "something went wrong";
+                }
+                ?>
                 </h5>
             </div>
         </div>

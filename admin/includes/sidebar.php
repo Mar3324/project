@@ -81,7 +81,7 @@ $page = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], "/")+1)
                                     </div>
                                 </nav>
                             </div> -->
-                            <div class="sb-sidenav-menu-heading">Manage Staff</div>
+                            <!-- <div class="sb-sidenav-menu-heading">Manage Staff</div>
                             <a class="nav-link <?=($page == 'admins-create.php') || ($page == 'admins.php') ? 'collapse active': 'collapsed';?>" 
                             href="#" data-bs-toggle="collapse" data-bs-target="#collapseAdmins" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -94,7 +94,7 @@ $page = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], "/")+1)
                                     <a class="nav-link <?=$page == 'admins-create.php'? 'active': '';?>" href="admins-create.php">Add Staff</a>
                                     <a class="nav-link <?=$page == 'admins.php'? 'active': '';?>" href="admins.php">View Staff</a>
                                 </nav>
-                    </div>
+                             </div> -->
                     <div class="sb-sidenav-menu-heading">Manage users</div>
                             <a class="nav-link <?=($page == 'customers-create.php') || ($page == 'customer.php') ? 'collapse active': 'collapsed';?> " 
                             href="#" data-bs-toggle="collapse" data-bs-target="#collapseCustomer" aria-expanded="false" aria-controls="collapseLayouts">

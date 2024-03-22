@@ -4,7 +4,7 @@
   </li>
   <?php if(isset($_SESSION['loggedIn'])): ?>
   <li class="nav-item">
-    <a class="nav-link" href="#"><?=$_SESSION['loggedInUser']['name']; ?></a>
+    <a class="nav-link" href="admin/index.php"><?=$_SESSION['loggedInUser']['name']; ?></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="logout.php">Logout</a>

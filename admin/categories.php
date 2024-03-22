@@ -19,7 +19,10 @@
                     </thead>
                     <tbody>
                         <?php 
-                        $categories = getAll('categories');//function found in config/function.php and is used for retrieving all data in a database
+                        //$categories = getAll('categories');//function found in config/function.php and is used for retrieving all data in a database
+                          $user_id = $_SESSION['loggedInUser']['user_id'];
+                            $query = "SELECT * FROM categories WHERE status='0' AND user_id='$user_id'";
+                            $categories = mysqli_query($conn, $query);
                         if(!$categories){
                             echo'<h3>Something is wrong!!Tell the devs to Check connection to database or check logic code</h3>';
                         }

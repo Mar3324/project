@@ -19,7 +19,7 @@ if(!isset($_SESSION["productItems"])){
         <div class="mb-3 p-4">
             <h5 id="orderPlaceSuccessMessage"></h5>
         </div>
-        <a href="orders.php" class="btn btn-secondary">Close</aon>
+        <a href="orders.php" class="btn btn-secondary">Close</a>
         <button class="btn btn-info px-4 mx-1" onclick="printMyBillingArea()">Print</button>
         <button type="button" onclick="downloadPDF('<?= $_SESSION['invoice_no']?>')" class="btn btn-warning saveCustomer">Download PDF</button>
       </div>

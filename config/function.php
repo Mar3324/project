@@ -152,7 +152,8 @@ function jsonResponse($status,$status_type, $message){
 function getCount($tableName){
     global $conn;
     $table = validate($tableName);
-    $query = "SELECT * FROM $table";
+    $user_id = $_SESSION['loggedInUser']['user_id'];
+    $query = "SELECT * FROM $table WHERE user_id='$user_id'";
     $query_run = mysqli_query($conn, $query);
     if($query_run){
         $totalCount = mysqli_num_rows($query_run);

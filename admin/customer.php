@@ -21,7 +21,10 @@
                     </thead>
                     <tbody>
                         <?php 
-                        $customers = getAll('customers');//function found in config/function.php and is used for retrieving all data in a database
+                       // $customers = getAll('customers');//function found in config/function.php and is used for retrieving all data in a database
+                       $user_id = $_SESSION['loggedInUser']['user_id'];
+                        $query = "SELECT * FROM customers WHERE status='0' AND user_id='$user_id'";
+                        $customers = mysqli_query($conn, $query);
                         if(!$customers){
                             echo'<h3>Something is wrong!!Tell the devs to Check connection to database or check logic code</h3>';
                         }

@@ -38,28 +38,29 @@
         </div>
         <div class="card-body">
             <?php 
+            $user_id = $_SESSION['loggedInUser']['user_id'];
             if(isset($_GET['date']) || isset($_GET['$payment_status'])) {
                 $orderDate = validate($_GET['date']);
                 $payment_status = validate($_GET['payment_status']);
                 if($orderDate !="" && $payment_status == ""){
                     $query = "SELECT o.*, c.*  FROM orders o, customers c 
-                            WHERE c.id = o.customer_id AND o.order_date='$orderDate'
+                            WHERE c.id = o.customer_id AND o.order_date='$orderDate' AND o.order_placed_by_id='$user_id'
                             ORDER BY o.id DESC";
 
                 }else if($orderDate == "" && $payment_status != ""){
                     $query = "SELECT o.*, c.*  FROM orders o, customers c 
-                            WHERE c.id = o.customer_id AND o.payment_mode='$payment_status' 
+                            WHERE c.id = o.customer_id AND o.payment_mode='$payment_status' AND o.order_placed_by_id='$user_id'
                             ORDER BY o.id DESC";
 
                 }else if($orderDate != "" && $payment_status != ""){
                     $query = "SELECT o.*, c.*  FROM orders o, customers c 
-                            WHERE c.id = o.customer_id AND o.payment_mode='$payment_status' AND o.order_date='$orderDate'
+                            WHERE c.id = o.customer_id AND o.payment_mode='$payment_status' AND o.order_date='$orderDate' AND o.order_placed_by_id='$user_id'
                             ORDER BY o.id DESC";
                 }else{
-                    $query = "SELECT o.*, c.*  FROM orders o, customers c WHERE c.id = o.customer_id ORDER BY o.id DESC";
+                    $query = "SELECT o.*, c.*  FROM orders o, customers c WHERE c.id = o.customer_id AND o.order_placed_by_id='$user_id' ORDER BY o.id DESC";
                 }
             }else{
-                 $query = "SELECT o.*, c.*  FROM orders o, customers c WHERE c.id = o.customer_id ORDER BY o.id DESC";
+                 $query = "SELECT o.*, c.*  FROM orders o, customers c WHERE c.id = o.customer_id  AND o.order_placed_by_id='$user_id' ORDER BY o.id DESC";
 
             }
             $orders = mysqli_query($conn, $query);

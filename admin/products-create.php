@@ -18,7 +18,7 @@
                         if($categories){
                             if(mysqli_num_rows(($categories))){
                                 foreach($categories as $cateItem){
-                                    echo '<option value="">'.$cateItem['name'].' id:'.$cateItem['id'].'</option>';
+                                    echo '<option value="'.$cateItem['id'].'">'.$cateItem['name'].'</option>';
                                 }
                             }else{
 
@@ -50,7 +50,7 @@
                     <input type="checkbox" name="status" class="btn btn-primary" style="width:30px;height:30px;">
                 </div>
                 <div class="col-md-6 mb-3 text-end">
-                    <button type="submit" name="updateProduct" class="btn btn-primary">Save</button>
+                    <button type="submit" name="saveProduct" class="btn btn-primary">Save</button>
                 </div>
             </div>
             </form>

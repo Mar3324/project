@@ -84,6 +84,7 @@ if(isset($_POST["updateAdmin"])){ //if the 'update' button in admins-edit.php is
 if(isset($_POST["saveCategory"])){
     $name = validate($_POST["name"]);
     $description= validate($_POST["description"]);
+    $user_placed_id = $_SESSION['loggedInUser']['user_id'];
     $status= isset($_POST["status"]) == true ?1:0;
 
 
@@ -91,6 +92,7 @@ if(isset($_POST["saveCategory"])){
             'name' => $name,
             'description'=> $description,
             'status' => $status,
+            'user_id' => $user_placed_id,
             ];
             $result = insert('categories',$data);
             if($result){
@@ -115,9 +117,9 @@ if(isset($_POST["updateCategory"])){
             ];
             $result = update('categories',$categoryId,$data);
             if($result){
-                redirect("categories-edit.php?id=".$categoryId, "Category Created Successfully");
+                redirect("categories-edit.php?id=".$categoryId, "Category Updated Successfully");
             }else{
-                redirect("categories-create.php?id=".$categoryId, "Oops Something went wrong.");
+                redirect("categories-edit.php?id=".$categoryId, "Oops Something went wrong.");
             }
 }
  
@@ -126,8 +128,9 @@ if(isset( $_POST["saveProduct"])){
     $category_id = validate($_POST["category_id"]);
     $name = validate($_POST["name"]);
     $price = validate($_POST["price"]);
-    $quantity = validate($_POST["name"]);
-    $description= validate($_POST["quantity"]);
+    $quantity = validate($_POST["quantity"]);
+    $user_placed_id = $_SESSION['loggedInUser']['user_id'];
+    $description= validate($_POST["description"]);
     $status= isset($_POST["status"]) == true ?1:0;
 
 
@@ -139,6 +142,8 @@ if(isset( $_POST["saveProduct"])){
             'price'=> $price,
             'quantity'=> $quantity,
             'status' => $status,
+            'user_id' => $user_placed_id,
+            
             ];
             $result = insert('products',$data);
             if($result){
@@ -184,12 +189,14 @@ if(isset( $_POST["saveCustomer"])){
     $email = validate($_POST["email"]);
     $phone = validate($_POST["phone"]);
     $status = isset($_POST["status"]) == true ?1:0;
+    $user_placed_id = $_SESSION['loggedInUser']['user_id'];
+
 
     if($name!=""){
         $emailCheck = mysqli_query($conn, "SELECT * FROM customers WHERE email='$email'");
         if($emailCheck){
             if(mysqli_num_rows($emailCheck)> 0){
-                redirect("customers.php","email already taken");
+                redirect("customer.php","email already taken");
         }
 
         $data = [
@@ -197,6 +204,8 @@ if(isset( $_POST["saveCustomer"])){
             'email'=> $email,
             'phone'=> $phone,
             'status'=> $status,
+            'created_at' => date('Y-m-d'),
+            'user_id' => $user_placed_id,
         ];
         $result = insert('customers',$data);
         if($result){
@@ -206,7 +215,7 @@ if(isset( $_POST["saveCustomer"])){
         }
 
     }else{
-        redirect('customers.php', 'Please fill all required fields');
+        redirect('customer.php', 'Please fill all required fields');
     }
 }
 }
@@ -232,7 +241,7 @@ if(isset( $_POST['updateCustomer'])){
             'phone'=> $phone,
             'status'=> $status,
         ];
-        $result = update('customers',$customerId,$data);
+        $result = update('customer',$customerId,$data);
         if($result){
             redirect("customer-edit.php?id=".$customerId,'Customer Updated successfully');
         }else{

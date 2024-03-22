@@ -40,7 +40,7 @@ $(document).ready(function(){
                 if(res.status == 200){
                     //window.location.reload();
                     //console.log(res);
-                     $('#productArea').load(' #productContent');
+                    $('#productContent').load(location.href + '#productContent');
                     alertify.success(res.message);
                 }else{
                     alertify.error(res.message);
