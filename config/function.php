@@ -5,7 +5,8 @@ require ("dbcon.php");
 //input field validation
 function validate($inputData){
     global $conn;
-    $validatedData = mysqli_real_escape_string( $conn, $inputData );//prevents malicious injection of code
+    $validatedData = mysqli_real_escape_string( $conn, $inputData );//prevents SQL injection of code
+    $validatedData = htmlspecialchars($validatedData, ENT_QUOTES, 'UTF-8'); //prevents XSS
     return trim($validatedData);
 }
 //redirect from one page to another with a status
